@@ -15,7 +15,17 @@ export interface MemoryGame {
 const initialState: MemoryGame = {
   failsCount: 0,
   score: 0,
-  cardsMatrix: ["card-1", "card-2"],
+  cardsMatrix: [
+    "card-1",
+    "card-2",
+    "Card-3",
+    "card-4",
+    "card-5",
+    "card-6",
+    "card-7",
+    "card-8",
+    "card-9",
+  ],
   pairs: TOTAL_PAIRS,
   triesToSelect: 2,
 };
