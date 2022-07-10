@@ -7,7 +7,7 @@ const TOTAL_PAIRS = 12;
 export interface MemoryGame {
   failsCount: number;
   score: number;
-  cardsMatrix: string[][];
+  cardsMatrix: string[];
   pairs: number;
   triesToSelect: number;
 }
@@ -15,7 +15,7 @@ export interface MemoryGame {
 const initialState: MemoryGame = {
   failsCount: 0,
   score: 0,
-  cardsMatrix: [[], []],
+  cardsMatrix: ["card-1", "card-2"],
   pairs: TOTAL_PAIRS,
   triesToSelect: 2,
 };
@@ -50,5 +50,5 @@ export const selectScore = (state: RootState) => state.game.score;
 export const selectFailsCount = (state: RootState) => state.game.failsCount;
 export const selectPairs = (state: RootState) => state.game.pairs;
 export const selectTries = (state: RootState) => state.game.triesToSelect;
-
+export const selectCards = (state: RootState) => state.game.cardsMatrix;
 export default memoryGameSlice.reducer;

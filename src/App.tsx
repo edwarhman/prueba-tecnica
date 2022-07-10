@@ -1,12 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import { Counter } from "./features/counter/Counter";
+import { MemoryGame } from "./features/memoryGame/MemoryGame";
+import "./App.css";
 
 function App() {
-  return (
-    <div>Hola</div>
-  );
+  return <MemoryGame />;
 }
 
 export default App;
