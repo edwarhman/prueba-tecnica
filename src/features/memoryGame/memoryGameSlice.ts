@@ -10,6 +10,9 @@ export interface MemoryGame {
   cardsMatrix: string[];
   pairs: number;
   triesToSelect: number;
+  firstCard: { type: string; index: number };
+  secondCard: { type: string; index: number };
+  disabledCards: number[];
 }
 
 const initialState: MemoryGame = {
@@ -43,6 +46,9 @@ const initialState: MemoryGame = {
   ],
   pairs: TOTAL_PAIRS,
   triesToSelect: 2,
+  firstCard: { type: "", index: -1 },
+  secondCard: { type: "", index: -1 },
+  disabledCards: [],
 };
 
 export const memoryGameSlice = createSlice({
@@ -61,6 +67,18 @@ export const memoryGameSlice = createSlice({
     decrementPairs: (state) => {
       state.pairs -= 1;
     },
+    setFirstCard: (state, action) => {
+      state.firstCard = action.payload;
+    },
+    setSecondCard: (state, action) => {
+      state.secondCard = action.payload;
+    },
+    addDisabledCards: (state, action) => {
+      state.disabledCards = action.payload;
+    },
+    resetTurn: (state) => {
+      state.triesToSelect = 2;
+    },
   },
 });
 
@@ -69,6 +87,10 @@ export const {
   incrementFailsCount,
   decrementTriesToSelect,
   decrementPairs,
+  setFirstCard,
+  setSecondCard,
+  addDisabledCards,
+  resetTurn,
 } = memoryGameSlice.actions;
 
 export const selectScore = (state: RootState) => state.game.score;
@@ -76,4 +98,9 @@ export const selectFailsCount = (state: RootState) => state.game.failsCount;
 export const selectPairs = (state: RootState) => state.game.pairs;
 export const selectTries = (state: RootState) => state.game.triesToSelect;
 export const selectCards = (state: RootState) => state.game.cardsMatrix;
+export const selectFirstCard = (state: RootState) => state.game.firstCard;
+export const selectSecondCard = (state: RootState) => state.game.secondCard;
+export const selectDisabledCards = (state: RootState) =>
+  state.game.disabledCards;
+
 export default memoryGameSlice.reducer;

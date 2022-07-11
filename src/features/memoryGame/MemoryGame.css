@@ -1,11 +1,12 @@
 .game {
   background-color: blueviolet;
-  /* max-width: 1000px; */
   min-height: 100vh;
 }
 
 .statusContainer {
   text-align: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cardsContainer {

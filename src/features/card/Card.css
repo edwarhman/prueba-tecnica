@@ -1,5 +1,8 @@
 .card {
-  /*padding: .2em;*/
+}
+
+.image {
+  cursor: pointer;
 }
 
 .backFace {
@@ -10,9 +13,7 @@
   margin: auto;
   width: 90%;
   padding: 1rem;
-  /* background-color: navy; */
 }
 
 .cardWrapper {
-  /* width: 50%; */
 }
