@@ -1,6 +1,7 @@
 .game {
-  background-color: blueviolet;
+  background-color: #220855;
   min-height: 100vh;
+  color: white;
 }
 
 .statusContainer {
@@ -14,4 +15,25 @@
   margin: auto;
   display: grid;
   grid-auto-rows: minmax(100px, auto);
+}
+
+.gameOver {
+  text-align: center;
+}
+
+.hugeFont {
+  font-size: 6em;
+}
+
+.bigFont {
+  font-size: 4em;
+}
+
+.midleFont {
+  font-size: 3em;
+}
+
+.gameScore {
+  font-size: 5em;
+  width: 2em;
 }

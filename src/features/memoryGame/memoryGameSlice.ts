@@ -56,9 +56,11 @@ export const memoryGameSlice = createSlice({
   initialState,
   reducers: {
     incrementScore: (state) => {
+      console.log("incrementa puntuacion");
       state.score += 1;
     },
     incrementFailsCount: (state) => {
+      console.log("incrementa fallos");
       state.failsCount += 1;
     },
     decrementTriesToSelect: (state) => {
@@ -79,6 +81,16 @@ export const memoryGameSlice = createSlice({
     resetTurn: (state) => {
       state.triesToSelect = 2;
     },
+    resetGame: (state) => {
+      state = initialState;
+      console.log("could reset Game");
+    },
+    resetScore: (state) => {
+      state.score = 0;
+    },
+    resetFails: (state) => {
+      state.failsCount = 0;
+    },
   },
 });
 
@@ -91,6 +103,9 @@ export const {
   setSecondCard,
   addDisabledCards,
   resetTurn,
+  resetGame,
+  resetFails,
+  resetScore,
 } = memoryGameSlice.actions;
 
 export const selectScore = (state: RootState) => state.game.score;

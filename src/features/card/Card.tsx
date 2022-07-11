@@ -1,4 +1,3 @@
-import Col from "react-bootstrap/Col";
 import {
   incrementFailsCount,
   incrementScore,
@@ -19,7 +18,7 @@ import ReactCardFlip from "react-card-flip";
 import { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { type } from "os";
-import { NULL } from "sass";
+import { useSelector } from "react-redux";
 
 const loadImage = require.context("../../images", true);
 let image = require(`../../images/question-square.svg`).default;
@@ -35,6 +34,8 @@ export function Card(params: {
   const dispatch = useAppDispatch();
   const tries = useAppSelector(selectTries);
   const firstCard = useAppSelector(selectFirstCard);
+  const score = useAppSelector(selectScore);
+  const fails = useSelector(selectFailsCount);
   const secondCard = useAppSelector(selectSecondCard);
 
   useEffect(() => {
@@ -49,6 +50,12 @@ export function Card(params: {
     }
   }, [params.disabled]);
 
+  useEffect(() => {
+    if (score === 0 && fails === 0) {
+      setHasEvent(true);
+    }
+  }, [score, fails]);
+
   function handleClick() {
     if (isFlipped && tries > 0) {
       setFlipped(!isFlipped);
@@ -62,21 +69,23 @@ export function Card(params: {
   }
 
   return (
-    <Col className="my-1 cardWrapper">
+    <div className="my-1 cardWrapper">
       <ReactCardFlip isFlipped={isFlipped}>
         <img
-          className="image frontFace border border-4 border-success rounded"
+          className={`image frontFace border border-4 rounded ${
+            hasEvent ? " off" : ""
+          }`}
           src={loadImage(`./${params.type}.svg`)}
           alt="quest"
           onClick={hasEvent ? handleClick : undefined}
         />
         <img
-          className="image backFace border border-success border-4 rounded"
+          className="image backFace border border-white border-4 rounded"
           src={loadImage(`./question-lg.svg`)}
           alt="quest"
           onClick={hasEvent ? handleClick : undefined}
         />
       </ReactCardFlip>
-    </Col>
+    </div>
   );
 }

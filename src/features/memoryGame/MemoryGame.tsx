@@ -15,8 +15,12 @@ import {
   resetTurn,
   setFirstCard,
   setSecondCard,
+  resetGame,
+  resetFails,
+  resetScore,
 } from "./memoryGameSlice";
 import { Card } from "../card/Card";
+import { Button } from "react-bootstrap";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { useWindowSize } from "@react-hook/window-size";
 import "./MemoryGame.css";
@@ -26,6 +30,7 @@ export function MemoryGame() {
   const dispatch = useAppDispatch();
   const score: number = useAppSelector(selectScore);
   const fails: number = useAppSelector(selectFailsCount);
+  const tries: number = useAppSelector(selectTries);
   const firstCard = useAppSelector(selectFirstCard);
   const secondCard = useAppSelector(selectSecondCard);
   const [disabledCards, setDisabledCards] = useState([-1]);
@@ -44,12 +49,24 @@ export function MemoryGame() {
   ));
   const [width, height] = useWindowSize();
   useEffect(() => {
-    checkForMatch();
-  }, [secondCard.index]);
+    if (tries === 0) {
+      checkForMatch();
+    }
+  }, [tries]);
 
   function checkForMatch() {
-    const match = firstCard.type === secondCard.type;
-    match ? disableCards() : unflipCards();
+    if (firstCard.type === secondCard.type) {
+      if (tries <= 2) {
+        dispatch(incrementScore());
+      }
+      disableCards();
+    } else {
+      if (tries <= 2) {
+        dispatch(incrementFailsCount());
+      }
+      unflipCards();
+    }
+
     dispatch(resetTurn());
     dispatch(setFirstCard({ type: "", index: -1 }));
     dispatch(setSecondCard({ type: "", index: -1 }));
@@ -63,10 +80,20 @@ export function MemoryGame() {
     setUnflippedCards([firstCard.index, secondCard.index]);
   }
 
-  return (
+  function handleTryAgain() {
+    dispatch(resetGame());
+    dispatch(setFirstCard({ type: "", index: -1 }));
+    dispatch(setSecondCard({ type: "", index: -1 }));
+    dispatch(resetTurn());
+    dispatch(resetFails());
+    dispatch(resetScore());
+    console.log("reset Game");
+  }
+
+  return score < 12 && fails < 10 ? (
     <div className="game">
       <div className="statusContainer d-flex m-3 mt-0">
-        <h2 className="gameScore"> Score: {score}</h2>
+        <h2> Score: {score}</h2>
         <h2 className="gameFailsCount">Fails: {fails}</h2>
       </div>
       <div
@@ -79,6 +106,26 @@ export function MemoryGame() {
         {cardsElements}
         {/* </Row> */}
       </div>
+    </div>
+  ) : (
+    <div className="game gameOver py-3">
+      <h1 className={`hugeFont mb-5 text-${score < 12 ? "danger" : "success"}`}>
+        Game Over
+      </h1>
+      <h2 className="bigFont">You {score < 12 ? "lose!" : "win!"}</h2>
+      <p className="midleFont">Score: </p>
+      <div>
+        <p className="gameScore border border-4 rounded d-inline-block">
+          {score}
+        </p>
+      </div>
+      <Button
+        onClick={handleTryAgain}
+        variant="success"
+        className="fs-1 mt-3 p-4"
+      >
+        Try Again
+      </Button>
     </div>
   );
 }
