@@ -38,7 +38,9 @@ export function MemoryGame() {
       </Row>
       <Button variant="danger">Click</Button>
       <div className="cardsContainer border rounded">
-        <Row xs={width > height ? 6 : 4}>{cardsElements}</Row>
+        <Row className="mx-3" xs={width > height ? 6 : 4}>
+          {cardsElements}
+        </Row>
       </div>
     </div>
   );

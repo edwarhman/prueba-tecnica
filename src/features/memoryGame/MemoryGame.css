@@ -1,6 +1,7 @@
 .game {
   background-color: blueviolet;
   max-width: 1000px;
+  height: 100vh;
 }
 
 .statusContainer {
