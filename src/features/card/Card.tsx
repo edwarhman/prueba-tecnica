@@ -1,13 +1,8 @@
 import {
-  incrementFailsCount,
-  incrementScore,
-  decrementPairs,
   decrementTriesToSelect,
   selectFailsCount,
-  selectPairs,
   selectScore,
   selectTries,
-  selectCards,
   selectFirstCard,
   selectSecondCard,
   setFirstCard,

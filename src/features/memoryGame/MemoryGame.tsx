@@ -1,21 +1,16 @@
 import {
   incrementFailsCount,
   incrementScore,
-  decrementPairs,
   decrementTriesToSelect,
   selectFailsCount,
-  selectPairs,
   selectScore,
   selectTries,
   selectCards,
   selectSecondCard,
   selectFirstCard,
-  addDisabledCards,
-  selectDisabledCards,
   resetTurn,
   setFirstCard,
   setSecondCard,
-  resetGame,
   resetFails,
   resetScore,
   shuffleCards,
@@ -87,7 +82,6 @@ export function MemoryGame() {
   }
 
   function handleTryAgain() {
-    dispatch(resetGame());
     dispatch(setFirstCard({ type: "", index: -1 }));
     dispatch(setSecondCard({ type: "", index: -1 }));
     dispatch(resetTurn());
@@ -109,9 +103,7 @@ export function MemoryGame() {
           gridTemplateColumns: `repeat(${width > height ? 6 : 4}, 1fr)`,
         }}
       >
-        {/* <Row className="mx-3" xs={width > height ? 6 : 4}> */}
         {cardsElements}
-        {/* </Row> */}
       </div>
     </div>
   ) : (
