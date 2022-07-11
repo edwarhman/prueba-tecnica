@@ -1,10 +1,8 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-import memoryGameReducer from '../features/memoryGame/memoryGameSlice';
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import memoryGameReducer from "../features/memoryGame/memoryGameSlice";
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    game: memoryGameReducer
+    game: memoryGameReducer,
   },
 });
 

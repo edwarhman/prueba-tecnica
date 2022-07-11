@@ -16,7 +16,6 @@ import { type } from "os";
 import { useSelector } from "react-redux";
 
 const loadImage = require.context("../../images", true);
-let image = require(`../../images/question-square.svg`).default;
 export function Card(params: {
   type: string;
   decrementTries: any;
