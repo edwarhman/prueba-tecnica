@@ -1,0 +1,18 @@
+.image {
+  cursor: pointer;
+}
+
+.backFace {
+  width: 90%;
+}
+
+.frontFace {
+  margin: auto;
+  width: 90%;
+  padding: 1rem;
+  background-color: #249f9c;
+}
+
+.off {
+  background-color: #111;
+}
