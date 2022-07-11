@@ -11,18 +11,20 @@ import {
 } from "./memoryGameSlice";
 import { Card } from "../card/Card";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { useWindowSize } from "@react-hook/window-size";
 import "./MemoryGame.css";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export function MemoryGame() {
-  const cards = useAppSelector(selectCards);
+  const cards: string[] = useAppSelector(selectCards);
   const cardsElements = cards.map((card, idx) => (
     <Card type={card} key={idx} />
   ));
-  const score = useAppSelector(selectScore);
-  const fails = useAppSelector(selectFailsCount);
+  const score: number = useAppSelector(selectScore);
+  const fails: number = useAppSelector(selectFailsCount);
+  const [width, height] = useWindowSize();
 
   return (
     <div className="game">
@@ -36,7 +38,7 @@ export function MemoryGame() {
       </Row>
       <Button variant="danger">Click</Button>
       <div className="cardsContainer border rounded">
-        <Row xs={4}>{cardsElements}</Row>
+        <Row xs={width > height ? 6 : 4}>{cardsElements}</Row>
       </div>
     </div>
   );
