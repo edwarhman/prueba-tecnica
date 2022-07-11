@@ -11,3 +11,7 @@ In the project directory, you can run:
 ### `yarn test`
 
 ### `yarn build`
+
+## Demo Link
+
+https://squid-game-memory.netlify.app/
