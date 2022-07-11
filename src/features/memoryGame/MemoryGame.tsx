@@ -18,6 +18,7 @@ import {
   resetGame,
   resetFails,
   resetScore,
+  shuffleCards,
 } from "./memoryGameSlice";
 import { Card } from "../card/Card";
 import { Button } from "react-bootstrap";
@@ -48,11 +49,16 @@ export function MemoryGame() {
     />
   ));
   const [width, height] = useWindowSize();
+
   useEffect(() => {
     if (tries === 0) {
       checkForMatch();
     }
   }, [tries]);
+
+  useEffect(() => {
+    dispatch(shuffleCards());
+  }, []);
 
   function checkForMatch() {
     if (firstCard.type === secondCard.type) {
@@ -87,6 +93,7 @@ export function MemoryGame() {
     dispatch(resetTurn());
     dispatch(resetFails());
     dispatch(resetScore());
+    dispatch(shuffleCards());
     console.log("reset Game");
   }
 
@@ -94,10 +101,10 @@ export function MemoryGame() {
     <div className="game">
       <div className="statusContainer d-flex m-3 mt-0">
         <h2> Score: {score}</h2>
-        <h2 className="gameFailsCount">Fails: {fails}</h2>
+        <h2 className="gameFailsCount">Failures: {fails}</h2>
       </div>
       <div
-        className="cardsContainer border rounded d-grid"
+        className="cardsContainer d-grid"
         style={{
           gridTemplateColumns: `repeat(${width > height ? 6 : 4}, 1fr)`,
         }}

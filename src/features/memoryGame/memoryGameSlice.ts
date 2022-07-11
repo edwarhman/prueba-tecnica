@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { stat } from "fs";
+import { shuffleArray } from "../../utils";
 import { RootState, AppThunk } from "../../app/store";
 
 const TOTAL_PAIRS = 12;
@@ -91,6 +92,9 @@ export const memoryGameSlice = createSlice({
     resetFails: (state) => {
       state.failsCount = 0;
     },
+    shuffleCards: (state) => {
+      shuffleArray(state.cardsMatrix);
+    },
   },
 });
 
@@ -106,6 +110,7 @@ export const {
   resetGame,
   resetFails,
   resetScore,
+  shuffleCards,
 } = memoryGameSlice.actions;
 
 export const selectScore = (state: RootState) => state.game.score;
